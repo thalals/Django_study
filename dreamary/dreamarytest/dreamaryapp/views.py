@@ -30,11 +30,31 @@ def create(request):
         post.description = request.POST['description']
 
         post.save()
+
         #import redirect 해줘야함 -> 페이지 돌리기
         return redirect('detail', post.id)
+
+def update(request) :
+    post = get_object_or_404(Designer, pk = designer_id)
+
+    if request.method == 'POST':
+        #파일이 있는지 체크
+        if 'image' in request.FILES:
+            post.image = request.FILES['image']
+        post.name = request.POST['name']
+        post.address = request.POST['address']
+        post.description = request.POST['description']
+
+        post.save()
+        return redirect('detail', post.id)
+
+    else :  #전송 방식이 get일 경우 기존의 정보 'post'를 뛰어줌
+        return render(request,'update.html',{'designer' : post})
 
 def delete(request, designer_id):
     post = get_object_or_404(Designer, pk = designer_id)
     post.delete()
 
     return redirect('home')
+
+
