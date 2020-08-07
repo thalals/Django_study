@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>create</title>
 </head>
 <body>
-    
+    <form method="POST" action="">
+        {% csrf_token %}    <!--post 요청을 하기위한 토큰 (그냥 넣으셈_보안토큰임)-->
+        {{jss_form.as_p}}   <!--{{jss_form}}---modelform을 p태그로 감쌈-->
+        <input type="submit" value="확인">  <!--submit 하면 데이터가 views.py로 ㄱㄱ-->
+    </form>
 </body>
 </html>
