@@ -11,9 +11,10 @@ def index(request) :
 def create(request) :
     if request.method =="POST" :
         filled_form = JssForm(request.POST)
-                                        #데이터 유효성 검사
-        if filled_form.is_valid():
-            filled_form.save();
+
+        if filled_form.is_valid():          #데이터 유효성 검사
+            filled_form.save()
             return redirect('index')
+
     jss_form = JssForm()
     return render(request,"create.html",{'jss_form' : jss_form})
