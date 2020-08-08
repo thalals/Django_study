@@ -19,6 +19,7 @@
     </div>
     
     {% for jss in all_jss %}
+    <a href="{% url 'detail' jss.id %}">
     <div class = "all_jss">
         <p>{{jss.title}}</p>
 
@@ -26,6 +27,7 @@
 
         <p> {{jss.update_at|date:"Y m d"}} </p>
     </div>
+    </a>
     {% endfor %}
 </body>
 </html>
