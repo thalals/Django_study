@@ -2,18 +2,35 @@ from django.shortcuts import render,redirect, get_object_or_404
 from .forms import JssForm
 from .models import Jasoseol
 from django.http import Http404
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request) :
     all_jss = Jasoseol.objects.all()
     return render(request,"index.html",{ 'all_jss':all_jss})
 
+def my_index(request) :
+    my_jss = Jasoseol.objects.filter(author=request.user)
+    return render(request, 'index.html',{'all_jss' : my_jss})
+
+# 모델.object.all()
+# 모델.object.get()
+# 모델.object.filter()
+@login_required(login_url='/login/')    #login 필요하면 기능수행
 def create(request) :
+    # if request.user.is_authenticated:       #authenticated 인증이 안되어있으면
+    #     return redirect('login')
+
     if request.method =="POST" :
         filled_form = JssForm(request.POST)
 
         if filled_form.is_valid():          #데이터 유효성 검사
-            filled_form.save()
+            temp_form = filled_form.save(commit =False)     #Commit =False 는 잠시 저장되기전(업데이트 생성전) 저장 지연
+            temp_form.author = request.user
+            temp_form.save()    
+            # filled_form.author = request.user
+            # filled_form.save()
             return redirect('index')
  
     jss_form = JssForm()
@@ -26,13 +43,16 @@ def detail(request, jss_id) :
     #     raise Http404
 
     my_jss = get_object_or_404(Jasoseol, pk=jss_id)
+
     return render(request, "detail.html",{'my_jss':my_jss})
 
 def delete(request, jss_id) :
     my_jss = Jasoseol.objects.get(pk=jss_id)
-    my_jss.delete()     #object 제거
+    if request.user == my_jss.author:
+        my_jss.delete()     #object 제거
+        return redirect('index')
 
-    return redirect('index')
+    raise PermissionDenied #위반 경고 메세지 출력
 #모델폼 사용 업데이트
 def update(request, jss_id) :
     my_jss = Jasoseol.objects.get(pk=jss_id)
