@@ -13,7 +13,7 @@
 생성시간 : {{my_jss.update_at|date:"Y-m-d"}}
 
 <br>
-{% if user==my_jss.author %}        <!--내가 작성한 글만 수정,삭제 가능하게-->
+{% if user == my_jss.author %}        <!--내가 작성한 글만 수정,삭제 가능하게-->
 <a href ="{% url 'update' my_jss.id %}">
     <button> 수정 </button>
 </a>
@@ -31,7 +31,7 @@
 </form>
 
 {% endif %}
-{% for comment in my_jss.comment_set.all %}
+{% for comment in my_jss.comment_form.all %}
 
 <p> 
     {{comment.content}} > {{comment.author}} 

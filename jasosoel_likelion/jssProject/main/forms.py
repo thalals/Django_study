@@ -16,7 +16,10 @@ class JssForm(forms.ModelForm):
             'class' : 'jss_title',      #class 태그? 를 지정해줌
             'placeholder' : '제목',
         })
-    #   폼태그 이쁘게 -> class : form-control
+        self.fields['content'].widget.attrs.update({
+            'class' : 'jss_content_form',      #class 태그? 를 지정해줌
+        })
+     #   폼태그 이쁘게 -> class : form-control
     #  widgets = {
     #         'title': forms.TextInput(attrs={'id': 'title', 'class': 'form-control'}),
     #         'content': forms.Textarea(attrs={'id': 'content', 'class': 'form-control'}),
@@ -24,6 +27,6 @@ class JssForm(forms.ModelForm):
     
 class CommentForm(forms.ModelForm):
 
-    class meta :
+    class Meta :
         model = Comment
         fields =('content',)

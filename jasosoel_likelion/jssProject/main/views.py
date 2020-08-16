@@ -69,9 +69,9 @@ def update(request, jss_id) :
 def create_comment(request, jss_id) :
     comment_form = CommentForm(request.POST)
     if comment_form.is_valid():
-        temp_form = comment_form.sae(commit=False)
-        temp_form.author =request.user
-        temp_form.jasoseol = Jasoseol.object.get(pk=jss_id)
+        temp_form = comment_form.save(commit=False)
+        temp_form.author = request.user
+        temp_form.jasoseol = Jasoseol.objects.get(pk=jss_id)
         temp_form.save()
     
         return redirect('detail', jss_id)
