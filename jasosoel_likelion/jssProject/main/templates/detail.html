@@ -31,7 +31,7 @@
 </form>
 
 {% endif %}
-{% for comment in my_jss.comment_form.all %}
+{% for comment in my_jss.comment_set.all %}     <!--comment_set은 역참조 이기때문에 _set 접미사 붙혀줌 -->
 
 <p> 
     {{comment.content}} > {{comment.author}} 

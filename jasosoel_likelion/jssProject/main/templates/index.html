@@ -45,7 +45,7 @@
         </a>
     {% endif %}
     <br>
-    {% for jss in all_jss %}
+    {% comment %} {% for jss in all_jss %}
     <a href="{% url 'detail' jss.id %}">
     <div class = "all_jss">
         <p>{{jss.author}}</p>
@@ -54,6 +54,6 @@
         <p> {{jss.update_at|date:"Y m d"}} </p>
     </div>
     </a>
-    {% endfor %}
+    {% endfor %} {% endcomment %}
 </body>
 </html>

@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 def index(request) :
     all_jss = Jasoseol.objects.all()
-    return render(request,"index.html",{ 'all_jss':all_jss})
+    return render(request,'index.html',{'all_jss':all_jss})
 
 def my_index(request) :
     my_jss = Jasoseol.objects.filter(author=request.user)
@@ -26,7 +26,7 @@ def create(request) :
         filled_form = JssForm(request.POST)
 
         if filled_form.is_valid():          #데이터 유효성 검사
-            temp_form = filled_form.save(commit =False)     #Commit =False 는 잠시 저장되기전(업데이트 생성전) 저장 지연
+            temp_form = filled_form.save(commit=False)     #Commit =False 는 잠시 저장되기전(업데이트 생성전) 저장 지연
             temp_form.author = request.user
             temp_form.save()    
             # filled_form.author = request.user
