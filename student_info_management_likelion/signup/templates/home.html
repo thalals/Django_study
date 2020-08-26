@@ -1,0 +1,84 @@
+{% load static %}
+<p>홈화면</p>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>남준이형의 두근두근 과제일기</title>
+    <style>
+        table {
+            width: 100%;
+            border: 1px solid #444444;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #444444;
+            padding: 10px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+    {% if user.is_authenticated %}
+    <!--로그인 되어있으면-->
+
+    안녕하세요 ~ {{user}} 님 >,,< <a href="{% url 'logout' %}">
+        <button>
+            로그아웃
+        </button>
+        </a>
+
+        {% else %} <a href="{% url 'login' %}">
+            <button>
+                로그인
+            </button>
+        </a>
+
+        <a href="{% url 'signup' %}">
+            <button>
+                회원가입
+            </button>
+        </a>
+        {% endif %}
+        <br>
+        <a href="{% url 'create' %}">
+            <button>
+                학생 정보 추가
+            </button>
+        </a>
+
+        <br>
+        <table border="1">
+            <tr>
+                <td>이름</td>
+                <td>학과</td>
+                <td>입학년도</td>
+                <td>학번</td>
+                <td>평균 학점</td>
+                <td>자세히</td>
+            </tr>
+
+            {% for student in all_student %}
+            <tr>
+                <td>{{student.name}}</td>
+                <td>{{student.major}}</td>
+                <td>{{student.admission_year}}</td>
+                <td>{{student.class_number}}</td>
+                <td>{{student.grade}}</td>
+
+                <td><a href="{% url 'detail' student.id %}">
+                        자세히 보기
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+
+</body>
+
+</html>

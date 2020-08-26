@@ -1,0 +1,26 @@
+<h2>새로운 학생정보를 저장하는 페이지</h2>
+
+<a href="{% url 'home' %}">
+    홈으로
+</a>
+<form action="{% url 'create' %}" method="POST">
+    {% csrf_token %}
+
+    <div>
+        <input type="text" id="bar" name="name" placeholder="이름">
+    </div>
+    <div>
+        <input type="text" id="bar" name="major" placeholder="학과">
+    </div>
+    <div>
+        <input type="text" id="bar" name="admission_year" placeholder="입학년도">
+    </div>
+    <div>
+        <input type="text" id="bar" name="class_number" placeholder="학번">
+    </div>
+    <div>
+        <input type="text" id="bar" name="grade" placeholder="평균학점">
+    </div>
+
+    <button class="btn btn-secondary btn-lg btn-block" type="submit">등록 완료하기</button>
+</form>
