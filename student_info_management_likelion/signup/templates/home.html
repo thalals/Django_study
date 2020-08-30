@@ -31,7 +31,12 @@
             로그아웃
         </button>
         </a>
-
+        <br>
+        <a href="{% url 'create' %}">
+            <button>
+                학생 정보 추가
+            </button>
+        </a>
         {% else %} <a href="{% url 'login' %}">
             <button>
                 로그인
@@ -44,12 +49,6 @@
             </button>
         </a>
         {% endif %}
-        <br>
-        <a href="{% url 'create' %}">
-            <button>
-                학생 정보 추가
-            </button>
-        </a>
 
         <br>
         <table border="1">

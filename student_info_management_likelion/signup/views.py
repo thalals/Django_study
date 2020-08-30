@@ -17,3 +17,6 @@ def home(request):
     """home views defination"""
     all_student = StudentModel.objects.all()
     return render(request,'home.html',{'all_student':all_student})
+
+def logout(request):
+    return redirect('home')

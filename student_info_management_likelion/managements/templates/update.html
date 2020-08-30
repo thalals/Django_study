@@ -3,7 +3,8 @@
 <a href="{% url 'home' %}">
     홈으로
 </a>
-<form action="{% url 'create' %}" method="POST">
+<!-- items.id 를 안주면 객체 새로 생성 -->
+<form action="{% url 'update' items.id %}" method="POST">
     {% csrf_token %}
 
     <div>
@@ -16,7 +17,7 @@
         <input type="text" id="bar" name="admission_year" placeholder="입학년도" value='{{items.admission_year}}'>
     </div>
     <div>
-        <input type="text" id="bar" name="class_number" placeholder="학번" value='{{items.number}}'>
+        <input type="text" id="bar" name="class_number" placeholder="학번" value='{{items.class_number}}'>
     </div>
     <div>
         <input type="text" id="bar" name="grade" placeholder="평균학점" value='{{items.grade}}'>
